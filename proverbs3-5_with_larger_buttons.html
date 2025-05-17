@@ -1,9 +1,8 @@
-
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Proverbs 3:5 - Background Music</title>
+  <title>Proverbs 3:5 - Custom Background Music Player</title>
   <style>
     body {
       margin: 0;
@@ -18,34 +17,68 @@
       justify-content: center;
       min-height: 100vh;
     }
+
     .content {
       padding: 40px;
       margin: 0;
       border-radius: 16px;
     }
+
     h2 {
       margin-top: 0;
-      font-size: 6em;  /* 放大3倍 */
+      font-size: 3em;
     }
+
     p {
-      font-size: 4.5em; /* 放大3倍 */
+      font-size: 1.5em;
       margin-bottom: 30px;
     }
+
     h3 {
-      font-size: 3.6em; /* 放大3倍 */
+      font-size: 2em;
       margin-bottom: 20px;
     }
-    audio {
+
+    .audio-player {
       margin-top: 30px;
       width: 80%;
-      max-width: 1000px; /* 放大3倍 */
-      font-size: 1.5em;
+      max-width: 1000px;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
     }
-    audio::-webkit-media-controls-play-button {
-      transform: scale(3); /* 放大播放按钮6倍 */
+
+    .play-button {
+      background-color: #4CAF50;
+      border: none;
+      padding: 20px 40px;
+      font-size: 2.5em;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-right: 20px;
     }
-    audio::-webkit-media-controls-volume-slider {
-      transform: scale(3); /* 稍微增大音量滑动条 */
+
+    .play-button:hover {
+      background-color: #45a049;
+    }
+
+    .audio-bar {
+      width: 60%;
+      height: 10px;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+
+    .audio-bar div {
+      width: 50%;
+      height: 100%;
+      background-color: #4CAF50;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -56,15 +89,43 @@
       Trust in the Lord with all your heart,<br>
       and lean not on your own understanding.
     </p>
-    <h3>🎵 背景音乐自动播放</h3>
-    <audio id="background-music" controls autoplay muted>
-      <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
- 
-    <script>
-      document.getElementById('background-music').muted = false;  // 取消静音
-    </script>
+    <h3>🎵 背景音乐</h3>
+    <div class="audio-player">
+      <button class="play-button" id="playButton">▶️</button>
+      <div class="audio-bar">
+        <div id="audioProgress"></div>
+      </div>
+    </div>
   </div>
+
+  <audio id="audio" preload="auto" style="display:none;">
+    <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playButton = document.getElementById('playButton');
+    const audioProgress = document.getElementById('audioProgress');
+
+    // 播放按钮
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '⏸️';  // 暂停按钮
+      } else {
+        audio.pause();
+        playButton.innerHTML = '▶️';  // 播放按钮
+      }
+    });
+
+    // 进度条更新
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      audioProgress.style.width = progress + '%';
+    });
+
+    // 自动播放音频
+    audio.play();
+  </script>
 </body>
 </html>
