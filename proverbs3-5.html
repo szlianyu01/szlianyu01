@@ -42,10 +42,14 @@
       and lean not on your own understanding.
     </p>
     <h3>🎵 背景音乐自动播放</h3>
-    <audio controls autoplay>
+    <audio id="background-music" controls autoplay muted>
       <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+
+    <script>
+      document.getElementById('background-music').muted = false;  // 取消静音
+    </script>
   </div>
 </body>
 </html>
