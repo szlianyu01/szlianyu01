@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+       <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,60 +26,76 @@
 
     h2 {
       margin-top: 0;
-      font-size: 3em;
+      font-size: 4em;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
     p {
-      font-size: 1.5em;
+      font-size: 2em;
       margin-bottom: 30px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
     h3 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
+    /* 自定义播放器容器 */
     .audio-player {
       margin-top: 30px;
       width: 80%;
-      max-width: 1000px;
-      font-size: 2em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(0, 0, 0, 0.7);
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
 
+    /* 播放按钮 */
     .play-button {
-      background-color: #4CAF50;
+      background: linear-gradient(145deg, #ff6f61, #ff3d2e);
       border: none;
       padding: 20px 40px;
-      font-size: 2.5em;
+      font-size: 3em;
       color: white;
       border-radius: 50%;
       cursor: pointer;
-      margin-right: 20px;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .play-button:hover {
-      background-color: #45a049;
+      transform: scale(1.2);
+      background: linear-gradient(145deg, #ff3d2e, #ff6f61);
     }
 
+    /* 音频进度条 */
     .audio-bar {
-      width: 60%;
+      width: 70%;
       height: 10px;
-      background-color: #ddd;
+      background: #ccc;
       border-radius: 5px;
+      position: relative;
     }
 
-    .audio-bar div {
-      width: 50%;
+    .audio-progress {
+      width: 0%;
       height: 100%;
-      background-color: #4CAF50;
+      background: #ff6f61;
       border-radius: 5px;
+      transition: width 0.1s ease;
     }
+
+    /* 音频控制 */
+    audio {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
@@ -93,17 +109,17 @@
     <div class="audio-player">
       <button class="play-button" id="playButton">▶️</button>
       <div class="audio-bar">
-        <div id="audioProgress"></div>
+        <div class="audio-progress" id="audioProgress"></div>
       </div>
     </div>
   </div>
 
-  <audio id="audio" preload="auto" style="display:none;">
+  <audio id="background-music" preload="auto">
     <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    const audio = document.getElementById('audio');
+    const audio = document.getElementById('background-music');
     const playButton = document.getElementById('playButton');
     const audioProgress = document.getElementById('audioProgress');
 
@@ -111,14 +127,14 @@
     playButton.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
-        playButton.innerHTML = '⏸️';  // 暂停按钮
+        playButton.innerHTML = '⏸️';  // 更改为暂停按钮
       } else {
         audio.pause();
-        playButton.innerHTML = '▶️';  // 播放按钮
+        playButton.innerHTML = '▶️';  // 恢复为播放按钮
       }
     });
 
-    // 进度条更新
+    // 音频进度条更新
     audio.addEventListener('timeupdate', () => {
       const progress = (audio.currentTime / audio.duration) * 100;
       audioProgress.style.width = progress + '%';
@@ -129,3 +145,4 @@
   </script>
 </body>
 </html>
+
