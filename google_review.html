@@ -1,0 +1,66 @@
+from pathlib import Path
+
+# 重新创建 Google Review 跳转 HTML 页面
+html_google_review = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>感谢您的评价！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      color: #333;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 20px 40px;
+      background-color: #ff6f61;
+      color: white;
+      font-size: 1.5em;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s ease;
+    }
+    a.button:hover {
+      background-color: #e95c4c;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🙏 感谢支持 SuebabyCrafts</h1>
+  <p>请花几秒钟在 Google 上留下您的五星好评！</p>
+  <a class="button" href="https://g.page/r/CRMFuZk9m4IFEAI/review" target="_blank">👉 点我留下评论</a>
+  <div class="footer">我们真诚感谢您的每一次鼓励 💛</div>
+</body>
+</html>
+"""
+
+# 保存 HTML 文件
+review_html_file = Path("/mnt/data/google-review.html")
+review_html_file.write_text(html_google_review, encoding="utf-8")
+
+review_html_file
