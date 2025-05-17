@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="5"> <!-- 5秒后自动跳转 -->
+  <title>随机跳转</title>
+  <script>
+    // 随机选择两个页面中的一个
+    function randomRedirect() {
+      const pages = [
+        "https://szlianyu01.github.io/szlianyu01/proverbs3-5.html", // Proverbs 3:5
+        "https://szlianyu01.github.io/szlianyu01/john3-16.html"     // John 3:16
+      ];
+
+      // 生成一个随机数 0 或 1，选择其中一个页面
+      const randomIndex = Math.floor(Math.random() * pages.length);
+      window.location.href = pages[randomIndex]; // 跳转到选中的页面
+    }
+
+    // 页面加载时触发随机跳转
+    window.onload = randomRedirect;
+  </script>
+</head>
+<body>
+  <h1>正在加载中，稍后将随机跳转...</h1>
+  <p>如果不想等待，可以点击以下链接直接访问：</p>
+  <ul>
+    <li><a href="https://szlianyu01.github.io/szlianyu01/proverbs3-5_with_lart_buttons.html">Proverbs 3:5</a></li>
+    <li><a href="https://szlianyu01.github.io/szlianyu01/john3-16.html">John 3:16</a></li>
+  </ul>
+</body>
+</html>
