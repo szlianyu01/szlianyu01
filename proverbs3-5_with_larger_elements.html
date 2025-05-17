@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proverbs 3:5 - Background Music</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: url('proverbs3-5-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .content {
+      padding: 40px;
+      margin: 0;
+      border-radius: 16px;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 6em;  /* 放大3倍 */
+    }
+    p {
+      font-size: 4.5em; /* 放大3倍 */
+      margin-bottom: 30px;
+    }
+    h3 {
+      font-size: 3.6em; /* 放大3倍 */
+      margin-bottom: 20px;
+    }
+    audio {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 1000px; /* 放大3倍 */
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h2>📖 Proverbs 3:5</h2>
+    <p>
+      Trust in the Lord with all your heart,<br>
+      and lean not on your own understanding.
+    </p>
+    <h3>🎵 背景音乐自动播放</h3>
+    <audio id="background-music" controls autoplay muted>
+      <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      document.getElementById('background-music').muted = false;  // 取消静音
+    </script>
+  </div>
+</body>
+</html>
