@@ -1,52 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Proverbs 3:5 - Background Music</title>
+  <meta charset="UTF-8" />
+  <title>John 3:16 Scrolling Text</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
-      background: url('/mnt/data/1954d9f6-c4ce-430b-b9cf-b7fd2d61165f.png') no-repeat center center fixed;
+      background: url('bible1.jpg') no-repeat center center fixed;
       background-size: cover;
-      text-align: center;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      backdrop-filter: brightness(0.9);
     }
-    .content {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 40px;
-      border-radius: 16px;
-      margin: 40px;
+    .marquee-container {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 0;
+      margin-bottom: 40px;
     }
-    h2 {
-      margin-top: 0;
+    .marquee-text {
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 100%;
+      font-size: 3em;
+      animation: marquee 20s linear infinite;
     }
-    audio {
-      margin-top: 30px;
-      width: 80%;
-      max-width: 600px;
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .play-button {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 40px;
+    }
+    .play-button:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .play-button.playing {
+      background: rgba(41, 121, 255, 0.6);
+    }
+    svg {
+      width: 70px;
+      height: 70px;
+      fill: #2979ff;
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h2>📖 Proverbs 3:5</h2>
-    <p style="font-size: 1.2em;">
-      Trust in the Lord with all your heart,<br>
-      and lean not on your own understanding.
-    </p>
-    <h3>🎵 点击播放背景音乐</h3>
-    <audio controls>
-      <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+  <div class="marquee-container" aria-label="Scrolling Bible verse">
+    <div class="marquee-text">
+      For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.
+    </div>
   </div>
+
+  <div class="play-button" id="playBtn" aria-label="Play background music" role="button" tabindex="0">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" id="playIcon">
+      <path d="M16 12v40l36-20z"/>
+    </svg>
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" id="pauseIcon" style="display:none;">
+      <rect x="16" y="12" width="12" height="40"/>
+      <rect x="36" y="12" width="12" height="40"/>
+    </svg>
+  </div>
+
+  <audio id="audioPlayer" src="just-relax-11157.mp3" loop></audio>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+
+    function updateButton() {
+      if (audioPlayer.paused) {
+        playBtn.classList.remove('playing');
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      } else {
+        playBtn.classList.add('playing');
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      }
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+      } else {
+        audioPlayer.pause();
+      }
+      updateButton();
+    });
+
+    playBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playBtn.click();
+      }
+    });
+
+    audioPlayer.addEventListener('play', updateButton);
+    audioPlayer.addEventListener('pause', updateButton);
+  </script>
 </body>
 </html>
+
