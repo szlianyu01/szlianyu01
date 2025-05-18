@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proverbs 3:5 - Custom Background Music Player</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .content {
+      padding: 40px;
+      margin: 0;
+      border-radius: 16px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 4em;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+      font-size: 2em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    h3 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    /* 自定义播放器容器 */
+    .audio-player {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    /* 播放按钮 */
+    .play-button {
+      background: linear-gradient(145deg, #ff6f61, #ff3d2e);
+      border: none;
+      padding: 20px 40px;
+      font-size: 3em;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .play-button:hover {
+      transform: scale(1.2);
+      background: linear-gradient(145deg, #ff3d2e, #ff6f61);
+      box-shadow: 0 0 15px rgba(255, 63, 46, 0.7);
+    }
+
+    /* 音频进度条 */
+    .audio-bar {
+      width: 70%;
+      height: 10px;
+      background: #ccc;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .audio-progress {
+      width: 0%;
+      height: 100%;
+      background: #ff6f61;
+      border-radius: 5px;
+      transition: width 0.1s ease;
+    }
+
+    /* 音频控制 */
+    audio {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h2>📖 Proverbs 3:5</h2>
+    <p>
+      Trust in the Lord with all your heart,<br>
+      and lean not on your own understanding.
+    </p>
+    <h3>🎵 背景音乐</h3>
+    <div class="audio-player">
+      <button class="play-button" id="playButton">▶️</button>
+      <div class="audio-bar">
+        <div class="audio-progress" id="audioProgress"></div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="background-music" preload="auto" autoplay muted>
+    <source src="proverbs3-5_background_music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById('background-music');
+    const playButton = document.getElementById('playButton');
+    const audioProgress = document.getElementById('audioProgress');
+
+    // 播放按钮
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '⏸️';  // 更改为暂停按钮
+      } else {
+        audio.pause();
+        playButton.innerHTML = '▶️';  // 恢复为播放按钮
+      }
+    });
+
+    // 音频进度条更新
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      audioProgress.style.width = progress + '%';
+    });
+
+    // 自动播放音频
+    audio.play();
+  </script>
+</body>
+</html>
