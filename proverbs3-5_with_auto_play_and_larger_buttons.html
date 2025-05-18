@@ -61,8 +61,8 @@
     .play-button {
       background: linear-gradient(145deg, #ff6f61, #ff3d2e);
       border: none;
-      padding: 20px 40px;
-      font-size: 3em;
+      padding: 30px 60px;
+      font-size: 4em;
       color: white;
       border-radius: 50%;
       cursor: pointer;
@@ -108,6 +108,7 @@
     </p>
     <h3>🎵 背景音乐</h3>
     <div class="audio-player">
+      <button class="play-button" id="playButton">▶️</button>
       <div class="audio-bar">
         <div class="audio-progress" id="audioProgress"></div>
       </div>
@@ -121,6 +122,7 @@
 
   <script>
     const audio = document.getElementById('background-music');
+    const playButton = document.getElementById('playButton');
     const audioProgress = document.getElementById('audioProgress');
 
     // 音频进度条更新
@@ -131,11 +133,23 @@
 
     // 延迟解除静音并自动播放
     window.onload = function() {
+      // 延迟2秒解除静音并播放
       setTimeout(function() {
         audio.muted = false;  // 解除静音
         audio.play();         // 播放音频
-      }, 2000);  // 延迟2秒解除静音并播放
+      }, 2000);  // 2秒后解除静音并播放
     };
+
+    // 播放按钮
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '⏸️';  // 更改为暂停按钮
+      } else {
+        audio.pause();
+        playButton.innerHTML = '▶️';  // 恢复为播放按钮
+      }
+    });
   </script>
 </body>
 </html>
