@@ -142,10 +142,12 @@
       audioProgress.style.width = progress + '%';
     });
 
-    // 页面加载后取消静音并播放
-     window.onload = function() {
-    audio.muted = false;
-    audio.play();
+   // 延迟解除静音并播放音频
+    window.onload = function() {
+      setTimeout(function() {
+        audio.muted = false;  // 解除静音
+        audio.play();         // 播放音频
+      }, 2000);  // 延迟2秒解除静音并播放
     };
   </script>
 </body>
