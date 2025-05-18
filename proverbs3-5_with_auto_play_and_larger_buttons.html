@@ -21,11 +21,11 @@
       padding: 40px;
     }
     h2 {
-      font-size: 4.5em; /* 放大3倍 */
+      font-size: 4.5em;
       margin-bottom: 20px;
     }
     p {
-      font-size: 2.7em; /* 放大3倍 */
+      font-size: 2.7em;
       margin-top: 0;
       margin-bottom: 30px;
     }
@@ -44,6 +44,9 @@
     }
     .play-button:hover {
       background: rgba(255, 255, 255, 0.6);
+    }
+    .play-button.playing {
+      background: rgba(41, 121, 255, 0.6);
     }
     .play-button svg {
       width: 70px;
@@ -69,7 +72,7 @@
       </svg>
     </div>
 
-    <audio id="audioPlayer" src="just-relax-11157.mp3"></audio>
+    <audio id="audioPlayer" src="just-relax-11157.mp3" loop></audio>
   </div>
 
   <script>
@@ -79,10 +82,10 @@
     playBtn.addEventListener('click', () => {
       if (audioPlayer.paused) {
         audioPlayer.play();
-        playBtn.style.background = 'rgba(41, 121, 255, 0.6)';
+        playBtn.classList.add('playing');
       } else {
         audioPlayer.pause();
-        playBtn.style.background = 'rgba(255, 255, 255, 0.35)';
+        playBtn.classList.remove('playing');
       }
     });
 
@@ -92,7 +95,16 @@
         playBtn.click();
       }
     });
+
+    // 监听播放状态，自动同步按钮样式（手动暂停也生效）
+    audioPlayer.addEventListener('play', () => {
+      playBtn.classList.add('playing');
+    });
+    audioPlayer.addEventListener('pause', () => {
+      playBtn.classList.remove('playing');
+    });
   </script>
 </body>
 </html>
+
 
