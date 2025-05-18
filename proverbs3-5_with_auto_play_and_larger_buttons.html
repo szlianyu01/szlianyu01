@@ -141,8 +141,8 @@
     // 播放按钮
     playButton.addEventListener('click', () => {
       if (audio.paused) {
-        audio.play();
         audio.muted = false;  // 确保解除静音
+        audio.play();
         playButton.innerHTML = '⏸️⏸️';  // 更改为暂停按钮
      
       } else {
