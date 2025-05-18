@@ -142,8 +142,10 @@
       audioProgress.style.width = progress + '%';
     });
 
-    // 自动播放音频
+    // 取消静音并自动播放
+    audio.muted = false;
     audio.play();
+    
   </script>
 </body>
 </html>
