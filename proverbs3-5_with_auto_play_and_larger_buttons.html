@@ -1,11 +1,7 @@
-from pathlib import Path
-
-# 重新创建 HTML 内容，因为代码执行状态已重置
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Proverbs 3:5 - Background Music</title>
   <style>
     body {
@@ -21,64 +17,44 @@ html_content = """
       justify-content: center;
       min-height: 100vh;
     }
-
     .content {
-      margin-top: 60px;
+      padding: 40px;
     }
-
     h2 {
-      font-size: 3em;
-      text-shadow: 2px 2px 4px #000;
-    }
-
-    p {
-      font-size: 1.5em;
-      text-shadow: 1px 1px 2px #000;
-    }
-
-    .audio-controls {
-      position: fixed;
-      bottom: 60px;
-      left: 0;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .play-button {
-      background-color: rgba(255, 255, 255, 0.6);
-      border: none;
-      padding: 20px 40px;
-      font-size: 2.5em;
-      border-radius: 50%;
-      cursor: pointer;
+      font-size: 4.5em;
       margin-bottom: 20px;
-      transition: background-color 0.3s;
     }
-
+    p {
+      font-size: 2.5em;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    .play-button {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
     .play-button:hover {
-      background-color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.6);
     }
-
-    .progress-container {
-      width: 80%;
-      max-width: 600px;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 5px;
-      overflow: hidden;
+    .play-button svg {
+      width: 70px;
+      height: 70px;
+      fill: #2979ff;
     }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: rgba(255, 100, 100, 0.8);
-      transition: width 0.2s;
-    }
-
     audio {
-      display: none;
+      width: 90%;
+      max-width: 600px;
+      outline: none;
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.7));
     }
   </style>
 </head>
@@ -86,39 +62,36 @@ html_content = """
   <div class="content">
     <h2>📖 Proverbs 3:5</h2>
     <p>Trust in the Lord with all your heart,<br>and lean not on your own understanding.</p>
-  </div>
 
-  <div class="audio-controls">
-    <button class="play-button" id="playButton">▶️</button>
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="play-button" id="playBtn" aria-label="Play background music" role="button" tabindex="0">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M16 12v40l36-20z"/>
+      </svg>
     </div>
-  </div>
 
-  <audio id="bgMusic">
-    <source src="just-relax-11157.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+    <audio id="audioPlayer" src="just-relax-11157.mp3"></audio>
+  </div>
 
   <script>
-    const audio = document.getElementById("bgMusic");
-    const playButton = document.getElementById("playButton");
-    const progressBar = document.getElementById("progressBar");
+    const playBtn = document.getElementById('playBtn');
+    const audioPlayer = document.getElementById('audioPlayer');
 
-    playButton.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.muted = false;
-        audio.play();
-        playButton.innerHTML = "⏸️";
+    playBtn.addEventListener('click', () => {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playBtn.style.background = 'rgba(41, 121, 255, 0.6)';
       } else {
-        audio.pause();
-        playButton.innerHTML = "▶️";
+        audioPlayer.pause();
+        playBtn.style.background = 'rgba(255, 255, 255, 0.35)';
       }
     });
 
-    audio.addEventListener("timeupdate", () => {
-      const progress = (audio.currentTime / audio.duration) * 100;
-      progressBar.style.width = progress + "%";
+    // Keyboard accessible play/pause
+    playBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playBtn.click();
+      }
     });
   </script>
 </body>
